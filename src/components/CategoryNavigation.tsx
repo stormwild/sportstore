@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import ToggleLink from './ToggleLink';
 
 const CategoryNavigation = ({
   baseUrl,
@@ -10,18 +10,18 @@ const CategoryNavigation = ({
 }) => {
   return (
     <>
-      <Link className='btn btn-secondary btn-block' to={baseUrl}>
+      <ToggleLink className='btn btn-block' to={baseUrl} exact={true}>
         All
-      </Link>
+      </ToggleLink>
       {categories &&
         categories.map((category) => (
-          <Link
-            className='btn btn-secondary btn-block'
+          <ToggleLink
+            className='btn btn-block'
             key={category}
             to={`${baseUrl}/${category.toLowerCase()}`}
           >
             {category}
-          </Link>
+          </ToggleLink>
         ))}
     </>
   );
