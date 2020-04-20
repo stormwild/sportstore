@@ -1,7 +1,7 @@
 import express from 'express'
 import jsonServer from 'json-server'
 import cors from 'cors'
-import data from './data'
+import data from './src/data/data'
 
 const PORT = process.argv[3] || 3500
 
