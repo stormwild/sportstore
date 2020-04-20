@@ -9,14 +9,17 @@ const ProductList = ({ products }: { products: Product[] }) => {
   return (
     <>
       {products.map((p) => (
-        <div className='card m-1 p-1 bg-light' key={p.id}>
-          <h4>
-            {p.name}
-            <span className='badge badge-pill badge-primary float-right'>
-              ${p.price.toFixed(2)}
-            </span>
-          </h4>
-          <div className='card-text bg-white p-1'>{p.description}</div>
+        <div className='card mb-2' key={p.id}>
+          <h6 className='card-header'>{p.category}</h6>
+          <div className='card-body'>
+            <h4 className='card-title'>
+              {p.name}
+              <span className='badge badge-pill badge-primary float-right'>
+                ${p.price.toFixed(2)}
+              </span>
+            </h4>
+            <div className='card-text'>{p.description}</div>
+          </div>
         </div>
       ))}
     </>
