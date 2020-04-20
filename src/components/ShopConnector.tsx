@@ -22,10 +22,16 @@ const filterProducts = (products: Product[] = [], category: any) =>
 
 type ShopConnectorComponentProps = {
   products: Product[];
+  categories: string[];
   loadData: Function;
 };
 
 class ShopConnectorComponent extends Component<ShopConnectorComponentProps> {
+  componentDidMount() {
+    this.props.loadData(DataTypes.CATEGORIES);
+    this.props.loadData(DataTypes.PRODUCTS);
+  }
+
   render() {
     return (
       <Switch>
@@ -35,6 +41,7 @@ class ShopConnectorComponent extends Component<ShopConnectorComponentProps> {
             <Shop
               {...this.props}
               {...routeProps}
+              categories={this.props.categories}
               products={filterProducts(
                 this.props.products,
                 routeProps.match.params.category
@@ -46,10 +53,6 @@ class ShopConnectorComponent extends Component<ShopConnectorComponentProps> {
       </Switch>
     );
   }
-  componentDidMount() {
-    this.props.loadData(DataTypes.CATEGORIES);
-    this.props.loadData(DataTypes.PRODUCTS);
-  }
 }
 
 const ShopConnector = connect(
@@ -58,34 +61,3 @@ const ShopConnector = connect(
 )((props: any) => <ShopConnectorComponent {...props} />);
 
 export default ShopConnector;
-
-/*
-  const {
-    products,
-    loadData,
-  }: { products: Product[]; loadData: Function } = props;
-
-  useEffect(() => {
-    loadData(DataTypes.PRODUCTS);
-    console.log(JSON.stringify(props));
-  }, []);
-
-  return (
-    <Switch>
-      <Route
-        path='/shop/products/:category?'
-        render={(routeProps) => (
-          <Shop
-            {...props}
-            {...routeProps}
-            products={filterProducts(
-              products,
-              routeProps.match.params.category
-            )}
-          />
-        )}
-      />
-      <Redirect to='/shop/products' />
-    </Switch>
-  );
-*/

@@ -1,8 +1,15 @@
 import React from 'react';
 import ProductList from './ProductList';
 import { Product } from '../data/Types';
+import CategoryNavigation from './CategoryNavigation';
 
-const Shop = ({ products }: { products: Product[] }) => {
+const Shop = ({
+  products,
+  categories,
+}: {
+  products: Product[];
+  categories: string[];
+}) => {
   return (
     <div className='container-fluid'>
       <div className='row'>
@@ -11,7 +18,12 @@ const Shop = ({ products }: { products: Product[] }) => {
         </div>
       </div>
       <div className='row'>
-        <div className='col-3 p-2'>Category Listing Here</div>
+        <div className='col-3 p-2'>
+          <CategoryNavigation
+            baseUrl='/shop/products'
+            categories={categories}
+          />
+        </div>
         <div className='col-9 p-2'>
           <ProductList products={products} />
         </div>
