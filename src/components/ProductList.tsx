@@ -1,7 +1,14 @@
 import React from 'react';
 import { Product } from '../data/Types';
+import { addToCart } from '../data/CartActionCreators';
 
-const ProductList = ({ products }: { products: Product[] }) => {
+const ProductList = ({
+  products,
+  addToCart,
+}: {
+  products: Product[];
+  addToCart: Function;
+}) => {
   if (products && products.length === 0) {
     return <h5 className='p-2'>No Products</h5>;
   }
@@ -19,6 +26,14 @@ const ProductList = ({ products }: { products: Product[] }) => {
               </span>
             </h4>
             <div className='card-text'>{p.description}</div>
+          </div>
+          <div className='card-footer'>
+            <button
+              className='btn btn-success btn-sm float-right'
+              onClick={() => addToCart(p, 1)}
+            >
+              Add To Cart
+            </button>
           </div>
         </div>
       ))}

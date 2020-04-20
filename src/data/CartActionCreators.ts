@@ -1,6 +1,6 @@
 import { ActionTypes, Product } from "./Types";
 
-export const addToCart = (product: Product, quantity: number) => ({
+export const addToCart = (product: Product, quantity?: number) => ({
   type: ActionTypes.CART_ADD,
   payload: {
     product,

@@ -4,6 +4,12 @@ import { connect } from 'react-redux';
 import { loadData } from '../data/ActionCreators';
 import { DataTypes, Product } from '../data/Types';
 import Shop from './Shop';
+import {
+  addToCart,
+  updateCartQuantity,
+  removeFromCart,
+  clearCart,
+} from '../data/CartActionCreators';
 
 const mapStateToProps = (dataStore: any) => ({
   ...dataStore,
@@ -11,6 +17,10 @@ const mapStateToProps = (dataStore: any) => ({
 
 const mapDispatchToProps = {
   loadData,
+  addToCart,
+  updateCartQuantity,
+  removeFromCart,
+  clearCart,
 };
 
 const filterProducts = (products: Product[] = [], category: any) =>
