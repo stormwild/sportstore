@@ -2,13 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-const CartSummary = ({
-  cartItems,
-  cartPrice,
-}: {
+type CartSummaryProp = {
   cartItems: number;
   cartPrice: number;
-}) => {
+};
+
+const CartSummary = ({ cartItems, cartPrice }: CartSummaryProp) => {
   const getSummary = () => {
     if (cartItems > 0) {
       return (

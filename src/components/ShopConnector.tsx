@@ -38,8 +38,10 @@ type ShopConnectorComponentProps = {
   cartItems: number;
   cart: CartPayload[];
   cartPrice: number;
+  addToCart: Function;
   updateCartQuantity: Function;
   removeFromCart: Function;
+  history: string[];
 };
 
 class ShopConnectorComponent extends Component<ShopConnectorComponentProps> {
@@ -62,6 +64,8 @@ class ShopConnectorComponent extends Component<ShopConnectorComponentProps> {
                 this.props.products,
                 routeProps.match.params.category
               )}
+              addToCart={this.props.addToCart}
+              history={this.props.history}
             />
           )}
         />

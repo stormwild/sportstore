@@ -5,14 +5,16 @@ import CategoryNavigation from './CategoryNavigation';
 import CartSummary from './CartSummary';
 import PropTypes from 'prop-types';
 
-// type ShopPropType = {
-//   products: Product[];
-//   categories: string[];
-//   cartItems: number;
-//   cartPrice: number;
-// };
+type ShopPropType = {
+  products: Product[];
+  categories: string[];
+  cartItems: number;
+  cartPrice: number;
+  addToCart: Function;
+  history: string[];
+};
 
-const Shop = (props: any) => {
+const Shop = (props: ShopPropType) => {
   const {
     products,
     categories,
@@ -23,8 +25,8 @@ const Shop = (props: any) => {
     addToCart: Function;
   } = props;
 
-  const handleAddToCart = (...args: any) => {
-    props.addToCart(...args);
+  const handleAddToCart = (product: Product, quantity?: number) => {
+    addToCart(product, quantity);
     props.history.push('/shop/cart');
   };
 
@@ -54,6 +56,9 @@ const Shop = (props: any) => {
 Shop.propTypes = {
   products: PropTypes.array.isRequired,
   categories: PropTypes.array.isRequired,
+  addToCart: PropTypes.func.isRequired,
+  cartItems: PropTypes.number.isRequired,
+  cartPrice: PropTypes.number.isRequired,
 };
 
 export default Shop;

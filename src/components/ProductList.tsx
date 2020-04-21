@@ -1,6 +1,5 @@
 import React from 'react';
 import { Product } from '../data/Types';
-import { addToCart } from '../data/CartActionCreators';
 
 const ProductList = ({
   products,
