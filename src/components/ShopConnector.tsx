@@ -2,7 +2,7 @@ import React, { useEffect, Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loadData } from '../data/ActionCreators';
-import { DataTypes, Product } from '../data/Types';
+import { DataTypes, Product, CartPayload } from '../data/Types';
 import Shop from './Shop';
 import {
   addToCart,
@@ -10,6 +10,7 @@ import {
   removeFromCart,
   clearCart,
 } from '../data/CartActionCreators';
+import CartDetails from './CartDetails';
 
 const mapStateToProps = (dataStore: any) => ({
   ...dataStore,
@@ -34,6 +35,11 @@ type ShopConnectorComponentProps = {
   products: Product[];
   categories: string[];
   loadData: Function;
+  cartItems: number;
+  cart: CartPayload[];
+  cartPrice: number;
+  updateCartQuantity: Function;
+  removeFromCart: Function;
 };
 
 class ShopConnectorComponent extends Component<ShopConnectorComponentProps> {
@@ -56,6 +62,20 @@ class ShopConnectorComponent extends Component<ShopConnectorComponentProps> {
                 this.props.products,
                 routeProps.match.params.category
               )}
+            />
+          )}
+        />
+        <Route
+          path='/shop/cart'
+          render={(routeProps) => (
+            <CartDetails
+              cartItems={this.props.cartItems}
+              cart={this.props.cart}
+              cartPrice={this.props.cartPrice}
+              updateCartQuantity={this.props.updateCartQuantity}
+              removeFromCart={this.props.removeFromCart}
+              {...this.props}
+              {...routeProps}
             />
           )}
         />

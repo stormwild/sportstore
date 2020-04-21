@@ -23,6 +23,11 @@ const Shop = (props: any) => {
     addToCart: Function;
   } = props;
 
+  const handleAddToCart = (...args: any) => {
+    props.addToCart(...args);
+    props.history.push('/shop/cart');
+  };
+
   return (
     <>
       <nav className='navbar navbar-dark bg-dark'>
@@ -38,7 +43,7 @@ const Shop = (props: any) => {
             />
           </div>
           <div className='col-9 p-2'>
-            <ProductList products={products} addToCart={addToCart} />
+            <ProductList products={products} addToCart={handleAddToCart} />
           </div>
         </div>
       </div>
