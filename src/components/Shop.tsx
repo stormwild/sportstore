@@ -4,6 +4,7 @@ import { Product } from '../data/Types';
 import CategoryNavigation from './CategoryNavigation';
 import CartSummary from './CartSummary';
 import PropTypes from 'prop-types';
+import NavBar from './NavBar';
 
 type ShopPropType = {
   products: Product[];
@@ -19,10 +20,14 @@ const Shop = (props: ShopPropType) => {
     products,
     categories,
     addToCart,
+    cartItems,
+    cartPrice,
   }: {
     products: Product[];
     categories: string[];
     addToCart: Function;
+    cartItems: number;
+    cartPrice: number;
   } = props;
 
   const handleAddToCart = (product: Product, quantity?: number) => {
@@ -32,10 +37,7 @@ const Shop = (props: ShopPropType) => {
 
   return (
     <>
-      <nav className='navbar navbar-dark bg-dark'>
-        <div className='navbar-brand'>SPORTS STORE</div>
-        <CartSummary {...props} />
-      </nav>
+      <NavBar {...{ cartItems, cartPrice }} />
       <div className='container-fluid'>
         <div className='row'>
           <div className='col-3 p-2'>

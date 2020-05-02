@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import CartDetailsRows from './CartDetailsRows';
 import { CartPayload } from '../data/Types';
-import CartSummary from './CartSummary';
+import NavBar from './NavBar';
 
 type CartDetailsType = {
   cartItems: number;
@@ -21,10 +21,7 @@ const CartDetails = ({
 }: CartDetailsType) => {
   return (
     <>
-      <nav className='navbar navbar-dark bg-dark'>
-        <div className='navbar-brand'>SPORTS STORE</div>
-        <CartSummary {...{ cartItems, cartPrice }} />
-      </nav>
+      <NavBar {...{ cartItems, cartPrice }} />
       <div className='m-3'>
         <h2 className='text-center'>Your Cart</h2>
         <div className='table-responsive'>

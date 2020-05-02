@@ -28,7 +28,7 @@ const CartSummary = ({ cartItems, cartPrice }: CartSummaryProp) => {
     <div className='navbar-text float-right'>
       <small>
         {getSummary()}
-        <Link className={getLinkClasses()} to='/shop/cart'>
+        <Link className={getLinkClasses()} to='/shop/cart' title='Cart'>
           <i className='fa fa-shopping-cart'></i>
         </Link>
       </small>
