@@ -1,3 +1,4 @@
+import { AxiosResponse } from "axios";
 
 export interface Product {
   id: number,
@@ -19,7 +20,6 @@ export const ActionTypes = {
   CART_UPDATE: "cart_update",
   CART_REMOVE: "cart_delete",
   CART_CLEAR: "cart_clear"
-
 };
 
 export interface DataPayload {
@@ -36,7 +36,7 @@ export type Payload = DataPayload | CartPayload
 
 export interface LoadDataAction {
   type: string,
-  payload: DataPayload
+  payload: DataPayload | Promise<DataPayload>
 }
 
 export interface CartAction {

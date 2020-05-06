@@ -1,4 +1,4 @@
-import { ActionTypes, SportsStore, LoadDataAction, initialState, SportsStoreAction } from "./Types";
+import { ActionTypes, SportsStore, LoadDataAction, initialState, SportsStoreAction, DataPayload } from "./Types";
 import { Reducer } from "redux";
 
 const ShopReducer: Reducer<SportsStore | undefined, SportsStoreAction> = (state: SportsStore | undefined, action: SportsStoreAction): SportsStore | undefined => {
@@ -7,7 +7,7 @@ const ShopReducer: Reducer<SportsStore | undefined, SportsStoreAction> = (state:
     case ActionTypes.DATA_LOAD:
       return {
         ...state || initialState,
-        [(action as LoadDataAction).payload.dataType]: (action as LoadDataAction).payload.data
+        [((action as LoadDataAction).payload as DataPayload).dataType]: ((action as LoadDataAction).payload as DataPayload).data
       };
     default:
       return state;

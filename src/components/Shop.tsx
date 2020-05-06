@@ -2,7 +2,6 @@ import React from 'react';
 import ProductList from './ProductList';
 import { Product } from '../data/Types';
 import CategoryNavigation from './CategoryNavigation';
-import CartSummary from './CartSummary';
 import PropTypes from 'prop-types';
 import NavBar from './NavBar';
 
