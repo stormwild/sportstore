@@ -48,7 +48,7 @@ for (let i = 10; i <= 503; i++) {
   let category = faker.helpers.randomize(categories);
   products.push({
     id: i,
-    name: faker.commerce.product(),
+    name: faker.commerce.productName(),
     category,
     description: `${category}: ${faker.lorem.sentence(3)}`,
     price: Number(faker.commerce.price())

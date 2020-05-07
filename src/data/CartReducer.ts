@@ -1,4 +1,4 @@
-import { ActionTypes, CartAction, SportsStore, initialState, SportsStoreAction } from "./Types";
+import { ActionTypes, CartAction, SportsStore, initialState, SportsStoreAction, PageStore, SortStore } from "./Types";
 import { Reducer } from "redux";
 
 const addCart = (state: SportsStore, action: CartAction): SportsStore => {
@@ -40,15 +40,15 @@ const removeCart = (state: SportsStore, action: CartAction): SportsStore => {
 }
 
 
-const CartReducer: Reducer<SportsStore | undefined, SportsStoreAction> = (state: SportsStore | undefined, action: SportsStoreAction): SportsStore | undefined => {
-  let newStore: SportsStore = { cart: [], cartItems: 0, cartPrice: 0, ...state || initialState }
+const CartReducer: Reducer<SportsStore | PageStore | SortStore | undefined, SportsStoreAction> = (state: SportsStore | PageStore | SortStore | undefined, action: SportsStoreAction): SportsStore | PageStore | SortStore | undefined => {
+  let newStore: SportsStore | PageStore | SortStore = { cart: [], cartItems: 0, cartPrice: 0, ...state || initialState }
   switch (action.type) {
     case ActionTypes.CART_ADD:
-      return addCart(newStore, action as CartAction)
+      return addCart(newStore as SportsStore, action as CartAction)
     case ActionTypes.CART_UPDATE:
-      return updateCart(newStore, action as CartAction)
+      return updateCart(newStore as SportsStore, action as CartAction)
     case ActionTypes.CART_REMOVE:
-      return removeCart(newStore, action as CartAction);
+      return removeCart(newStore as SportsStore, action as CartAction);
     case ActionTypes.CART_CLEAR:
       return { ...state || initialState, cart: [], cartItems: 0, cartPrice: 0 }
     default:

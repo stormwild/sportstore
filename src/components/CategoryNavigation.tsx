@@ -10,7 +10,7 @@ const CategoryNavigation = ({
 }) => {
   return (
     <>
-      <ToggleLink className='btn btn-block' to={baseUrl} exact={true}>
+      <ToggleLink className='btn btn-block' to={`${baseUrl}/all`} exact={true}>
         All
       </ToggleLink>
       {categories &&

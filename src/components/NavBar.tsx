@@ -9,7 +9,7 @@ type NavBarProps = {
 
 const NavBar = ({ cartItems, cartPrice }: NavBarProps) => {
   return (
-    <nav className='navbar navbar-dark bg-dark'>
+    <nav className='navbar navbar-dark bg-dark mb-3'>
       <Link className='navbar-brand' to='/'>
         SPORTS STORE
       </Link>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loadData } from '../data/ActionCreators';
@@ -11,6 +11,7 @@ import {
   clearCart,
 } from '../data/CartActionCreators';
 import CartDetails from './CartDetails';
+import DataGetter from './DataGetter';
 
 const mapStateToProps = (dataStore: any) => ({
   ...dataStore,
@@ -23,13 +24,6 @@ const mapDispatchToProps = {
   removeFromCart,
   clearCart,
 };
-
-const filterProducts = (products: Product[] = [], category: any) =>
-  !category || category === 'All'
-    ? products
-    : products.filter(
-        (p) => p.category.toLowerCase() === category.toLowerCase()
-      );
 
 type ShopConnectorComponentProps = {
   products: Product[];
@@ -44,50 +38,52 @@ type ShopConnectorComponentProps = {
   history: string[];
 };
 
-class ShopConnectorComponent extends Component<ShopConnectorComponentProps> {
-  componentDidMount() {
-    this.props.loadData(DataTypes.CATEGORIES);
-    this.props.loadData(DataTypes.PRODUCTS);
-  }
+const ShopConnectorComponent = (props: ShopConnectorComponentProps) => {
+  const { loadData, categories, cart, cartItems, cartPrice, history } = props;
 
-  render() {
-    return (
-      <Switch>
-        <Route
-          path='/shop/products/:category?'
-          render={(routeProps) => (
+  useEffect(() => {
+    loadData(DataTypes.CATEGORIES);
+  }, []);
+
+  return (
+    <Switch>
+      <Redirect
+        from='/shop/products/:category'
+        to='/shop/products/:category/1'
+        exact={true}
+      />
+      <Route
+        path='/shop/products/:category/:page'
+        render={(routeProps) => (
+          <DataGetter {...props} {...routeProps}>
             <Shop
-              {...this.props}
+              {...props}
               {...routeProps}
-              categories={this.props.categories}
-              products={filterProducts(
-                this.props.products,
-                routeProps.match.params.category
-              )}
-              addToCart={this.props.addToCart}
-              history={this.props.history}
+              categories={categories}
+              addToCart={addToCart}
+              history={history}
             />
-          )}
-        />
-        <Route
-          path='/shop/cart'
-          render={(routeProps) => (
-            <CartDetails
-              cartItems={this.props.cartItems}
-              cart={this.props.cart}
-              cartPrice={this.props.cartPrice}
-              updateCartQuantity={this.props.updateCartQuantity}
-              removeFromCart={this.props.removeFromCart}
-              {...this.props}
-              {...routeProps}
-            />
-          )}
-        />
-        <Redirect to='/shop/products' />
-      </Switch>
-    );
-  }
-}
+          </DataGetter>
+        )}
+      />
+      <Route
+        path='/shop/cart'
+        render={(routeProps) => (
+          <CartDetails
+            cartItems={cartItems}
+            cart={cart}
+            cartPrice={cartPrice}
+            updateCartQuantity={updateCartQuantity}
+            removeFromCart={removeFromCart}
+            {...props}
+            {...routeProps}
+          />
+        )}
+      />
+      <Redirect to='/shop/products/all/1' />
+    </Switch>
+  );
+};
 
 const ShopConnector = connect(
   mapStateToProps,

@@ -4,6 +4,10 @@ import { Product } from '../data/Types';
 import CategoryNavigation from './CategoryNavigation';
 import PropTypes from 'prop-types';
 import NavBar from './NavBar';
+import { ProductConnector } from './ProductConnector';
+import PaginationControls from './PaginationControls';
+
+const ProductPages = ProductConnector(PaginationControls);
 
 type ShopPropType = {
   products: Product[];
@@ -39,13 +43,14 @@ const Shop = (props: ShopPropType) => {
       <NavBar {...{ cartItems, cartPrice }} />
       <div className='container-fluid'>
         <div className='row'>
-          <div className='col-3 p-2'>
+          <div className='col-sm-3 mb-3'>
             <CategoryNavigation
               baseUrl='/shop/products'
               categories={categories}
             />
           </div>
-          <div className='col-9 p-2'>
+          <div className='col-sm-9'>
+            <ProductPages />
             <ProductList products={products} addToCart={handleAddToCart} />
           </div>
         </div>
